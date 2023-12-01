@@ -1,0 +1,89 @@
+{% include 'adminheader.html' %}
+
+  <section style="background: url(/static/images/b2.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<script> 
+		function printDiv() { 
+			var divContents = document.getElementById("div_print").innerHTML; 
+			var a = window.open('', '', 'height=500, width=500'); 
+			a.document.write(divContents); 
+			a.document.close(); 
+			a.print(); 
+		} 
+	</script> 
+
+<form method="post">
+	<table class="table" align="right" style="width: 1000px">
+		<tr>
+			<th>FROM DATE</th>
+			<td><input type="date" name="from_date" class="form-control"></td>
+			<th>TO DATE</th>
+			<td><input type="date" name="to_date" class="form-control"></td>
+			<td>	
+			<input type="submit" name="submit" value="search" class="btn btn-info"></td>
+		</tr>
+	</table>
+</form>
+<br><br>
+ <input type="button" class="btn btn-info" value="click to print" onclick="printDiv()">
+   <div id="div_print" > 
+<center>
+	<h1 style="font-size: 50px;">Purchase History</h1>
+	<table class="table" border="1">
+			<th>Sl No</th>
+			
+			
+			<th>Item</th>
+			<th>Image</th>
+			<th>Mrp</th>
+			<th>Vendor</th>
+			<!-- <th>Quantity</th> -->
+			<th>Purchase Quantity</th>
+			<th>Total</th>
+
+			<th>Upadated stock</th>
+			<th>Date</th>
+			
+			
+			 
+		</tr>
+		{% for row in data['purchase'] %}
+		<tr>
+			<td>{{loop.index}}</td>
+			
+			<td>{{row['product']}}</td>
+			<td><img src="/{{row['image']}}" style="height: 50px;width: 50px"></td>
+
+			<td>{{row['rate']}}</td>
+			<td>{{row['vname']}}</td>
+			<td>{{row['bqua']}}</td>
+			<td>{{row['total']}}</td>
+			
+
+
+			
+			<td>{{row['quantity']}}</td>
+			
+			<td>{{row['date']}}</td>
+			
+			
+		</tr>
+		{% endfor %} 
+
+	</table>
+</center>
+
+          </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+		   		
+{% include 'footer.html' %}

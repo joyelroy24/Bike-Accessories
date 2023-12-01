@@ -1,0 +1,44 @@
+{% include 'adminheader.html' %}
+
+  <section style="background: url(/static/images/b2.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+ 
+		{% if data['cat'] %}
+		<h1> MANAGE PRODUCTS</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>SL.NO</th>
+				<th>CATEGORY</th>
+				<th>SUBCATEGORY</th>
+				<TH>MANAGE PRODUCTS</TH>
+			</tr>
+			{% for row in data['cat'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ row['category'] }}</td>
+				<td>{{row['subcategory']}}</td>	
+				<td><a href="admin_manage_productssub?cat={{ row['category'] }}&subcat={{ row['subcategory_id'] }}" class="btn btn-info">MANAGE PRODUCTS</a></td>
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO CATEGORIES TO MANAGE PRODUCTS</h2>
+		{% endif %}
+	
+	</form>
+</center>
+          </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+		   		
+{% include 'footer.html' %}

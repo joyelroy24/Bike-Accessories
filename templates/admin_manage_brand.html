@@ -1,0 +1,83 @@
+{% include 'adminheader.html' %}
+
+  <section style="background: url(/static/images/b2.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE BRAND</h1>
+		
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>BRRAND</th>
+			<td><input type="text" name="brand"  class="form-control" value="{{data['updater'][0]['brand']}}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+		{% else %}
+
+
+	
+		<h1>MANAGE BRAND</h1>
+
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>BRAND</th>
+			<td><input type="text" name="brand"  class="form-control"></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="SUBMIT" class="btn btn-primary"></td>
+		</tr>
+
+
+		</table>
+
+
+		{% if data['brand'] %}
+		<h1>BRAND ADDED IN OUR SYSTEM</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>SL.NO</th>
+				<th>BRRAND</th>
+				<th>UPDATE</th>
+				
+			</tr>
+			{% for row in data['brand'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ row['brand'] }}</td>
+				<td><a href="?action=update&id={{ row['brand_id'] }}" class="btn btn-warning">UPDATE</a></td>
+					{% if row['bstatus']=='inactive' %}
+				<td><a href="?action=active&id={{ row['brand_id'] }}" class="btn btn-danger" >ACTIVE</a></td>
+				{% else  %}
+				<td><a href="?action=inactive&id={{ row['brand_id'] }}" class="btn btn-danger" >INACTIVE</a></td>
+				
+				{% endif %}
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO BRAND ADDED IN OUR SYSTEM</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+          </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+		   		
+{% include 'footer.html' %}

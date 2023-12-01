@@ -1,0 +1,52 @@
+{% include 'staffheader.html' %}
+
+  <section style="background: url(/static/images/bike1.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+	<form method="post">
+		{% if data['pro'] %}
+		<h1>MANAGE STOCKS</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>SL.NO</th>
+				<th>PRODUCT</th>
+				<th>CATEGORY</th>
+				<th>SUBCATEGORY</th>
+				<th>BRAND</th>
+				<th>QUANTITY</th>
+				<TH>RATE</TH>
+			</tr>
+			{% for row in data['pro'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ row['product'] }}</td>
+				<td>{{row['category']}}</td>
+				<td>{{row['subcategory']}}</td> 
+				<td>{{row['brand']}}</td>
+				<td>{{row['quantity']}}</td>
+				<td>{{ row['rate'] }}</td>	
+				<td><a href="staff_make_purchase?pid={{row['product_id']}}&rate={{ row['rate'] }}&pname={{ row['product'] }}" class="btn btn-primary">MANAGE STOCK</a></td>			
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h1>NO PRODUCTS </h1>
+		{% endif %}
+
+
+	</form>
+</center>
+          </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+		   		
+{% include 'footer.html' %}

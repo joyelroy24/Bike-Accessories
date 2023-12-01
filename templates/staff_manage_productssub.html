@@ -1,0 +1,130 @@
+{% include 'staffheader.html' %}
+
+  <section style="background: url(/static/images/bike1.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+	<form method="post" enctype="multipart/form-data">
+		{% if data['updater'] %}
+		<h1>UPDATE PRODUCT</h1>
+		<table class="table" style="width: 500px">
+			<tr>
+			<th>BARND</th>
+			<td>
+				<select name="brand" class="form-control">
+					{% for row in data['brand'] %}
+					{% if row['brand_id']==data['brand_id'] %}
+					<option value="{{row['brand_id']}}" selected>{{row['brand']}}</option>
+					{% else %}
+					
+					<option value="{{row['brand_id']}}">{{row['brand']}}</option>
+					{% endif %}
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>PRODUCT</th>	
+			<td><input type="text" name="pro" value="{{data['updater'][0]['product']}}" class="form-control"></td>
+		</tr>
+		<tr>
+			<th>IMAGE</th>
+			<td><input type="file" name="img"></td>
+		</tr>
+		<tr>
+			<th>RATE</th>
+			<td><input type="text" name="rate" class="form-control" value="{{data['updater'][0]['rate']}}" class="form-control"> </td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+		{% else %}
+
+
+	
+		<h1>MANAGE PRODUCTS ON {{data['cat']}}</h1>
+
+		<table class="table" style="width:  500px" >
+		<tr>
+			<th>BARND</th>
+			<td>
+				<select name="brand" class="form-control">
+					{% for row in data['brand'] %}
+					<option value="{{row['brand_id']}}">{{row['brand']}}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>PRODUCT</th>	
+			<td><input type="text" name="pro" class="form-control"></td>
+		</tr>
+		<tr>
+			<th>IMAGE</th>	
+			<td><input type="file" name="img" ></td>
+		</tr>
+		<tr>
+			<th>RATE</th>
+			<td><input type="text" name="rate" class="form-control"></td>
+		</tr>
+	
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="SUBMIT" class="btn btn-info"></td>
+		</tr>
+
+
+		</table>
+
+
+		{% if data['pro'] %}
+		<h1>PRODUCTS ADDED IN OUR SYSTEM</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>SL.NO</th>
+				<th>PRODUCT</th>
+				<th>IMAGE</th>
+				<th>BRAND</th>
+				<TH>RATE</TH>
+				<th>UPDATE</th>
+				
+			</tr>
+			{% for row in data['pro'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ row['product'] }}</td>
+				<td><img src="/{{row['image']}}" style="height: 100px;width:  100px"></td>
+				<td>{{row['brand']}}</td>
+				<td>{{ row['rate'] }}</td>	
+				<td><a href="?action=update&pid={{ row['product_id'] }}&cat={{data['cat']}}&subcat={{data['subcat']}}" class="btn btn-warning">UPDATE</a></td>
+				{% if row['status']=='inactive' %}
+				<td><a href="?action=active&pid={{ row['product_id'] }}&cat={{data['cat']}}&subcat={{data['subcat']}}" class="btn btn-danger" >ACTIVE</a></td>
+				{% else  %}
+				<td><a href="?action=inactive&pid={{ row['product_id'] }}&cat={{data['cat']}}&subcat={{data['subcat']}}" class="btn btn-danger" >INACTIVE</a></td>
+				
+				{% endif %}
+				
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO PRODUCTS ON {{data['cat']}}</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+          </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+		   		
+{% include 'footer.html' %}

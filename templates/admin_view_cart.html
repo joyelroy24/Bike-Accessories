@@ -1,0 +1,78 @@
+{% include 'adminheader.html' %}
+
+  <section style="background: url(/static/images/b2.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+	<form method="post">
+{% if data['updater']%}
+	<h1>UPDATE QUANTITY OF {{data['updater']}}</h1>
+	<table>
+		<tr>
+			<th> QUANTITY</th>
+			
+			<td><input type="text" name="upqua"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2"><input type="submit" name="updatequa" value=UPDATE class="btn btn-primary"></td>
+		</tr>
+	</table>
+	<br>
+	
+	{% elif data['cart']%}
+	<h1>MY CART</h1>
+	{% for row in data['cart']%}
+	<table class="table" style="width: 600px" border="1">
+		<br>
+		<br>
+		<tr>
+			<th align="center">PRODUCT</th>
+			<th>{{row['product']}}</th>
+		</tr>
+		<tr>
+			<th>QAUNTITY</th>
+			<td>{{row['purqua']}}</td>
+		</tr>
+		<tr>
+			<th>AMOUNT</th>
+			<td>{{row['amount']}}</td>
+		</tr>
+		<tr>
+			<th colspan="2">vendor-{{row['vname']}}</th>
+		</tr>
+		<tr>
+			<td><a href="?action=update&vpid={{row['vproduct_id']}}&pmastid={{row['pmaster_id']}}&purqua={{row['purqua']}}&prorate={{row['rate']}}" class="btn btn-primary">UPDATE QUANTITY</a></td>
+			<td><a href="?action=delete&vpid={{row['vproduct_id']}}&pmastid={{row['pmaster_id']}}&purqua={{row['purqua']}}&prorate={{row['rate']}}" class="btn btn-danger">REMOVE</a></td>
+		</tr>
+
+			
+	
+	</table>
+	{% endfor %}
+	</table>
+<table>
+
+	<tr>
+		<th class="btn btn-primary">TOTAL {{data['cart'][0]['total']}}</th>
+		<td><a href="?action2=payment&pid={{data['cart'][0]['pmaster_id']}}&amt={{data['cart'][0]['total']}}" class="btn btn-warning">PLACE ORDER</a></td>
+	</tr>
+</table>
+{% else %}
+<h1>YOUR CART EMPTY</h1>
+{% endif %}
+</form>
+</center>
+          </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+		   		
+
+{% include 'footer.html' %}

@@ -1,0 +1,82 @@
+{% include 'adminheader.html' %}
+
+  <section style="background: url(/static/images/b2.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+
+
+        {% if data['products'] %}  
+    <h1>PRODUCTS ON ORDER iD-{{data['products'][0]['omaster_id']}} </h1>
+    <table class="table" style="width: 500px"> 
+        <tr>
+            
+            <th>PRODUCT NAME</th>
+            <th>CATEGORY</th>
+            <th>SUBCATEGORY</th>
+            <th>BRAND</th>
+            <th>AMOUNT</th>
+            <th>QUANTITY</th>
+        </tr>
+        {% for row in data['products']%}
+        <tr>
+          
+            <td>{{ row['product'] }}</td>
+            <td>{{ row['category'] }}</td>
+             <td>{{ row['subcategory'] }}</td>
+             <td>{{ row['brand'] }}</td>
+             <td>{{ row['amount'] }}</td>
+            <td align="center" colspan="2">{{ row['orqua'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+	{% elif data['orders'] %}
+<h1>VIEW ORDER HISTORY</h1>
+		<table class="table" style="width: 1250px">
+		<tr>
+			<th>REFERENCE ID OF PURCHASE</th>
+             
+            <th>STAFF NAME</th>
+            <th>VENDOR NAME</th>
+            
+			<th>AMOUNT OF PURCHASE</th>
+			<th>VIEW PRODUCTS</th>
+		
+			
+		</tr>
+		{% for row in data['orders'] %}
+        <tr>
+            <td>{{ row['pmaster_id']}}</td>
+              <td>{{row['firstname']}}</td>
+            <td>{{row['phone']}}</td>
+            <td>{{row['date']}}</td>
+            <td>{{ row['total']}}</td>
+        
+            <td><a href="?action=products&pmaster_id={{row['pmaster_id']}}" class="btn btn-danger">VIEW PRODUCTS</a></td>
+           
+            {% if row['pmstatus']=='ordered' %}
+            <td><a href="?action=delivered&pmaster_id={{row['pmaster_id']}}" class="btn btn-danger">UPDATE AS DELIVERED</a></td>
+            {% else%}
+            <td>{{row['pmstatus']}}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+	</table>
+  <a href="admin_print" class="btn btn-info">PRINT</a>
+	{%else %}
+	<h1>NO BOOKING HISTORY</h1>
+	{% endif %}
+
+</center>
+       </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+{% include 'footer.html' %}

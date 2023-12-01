@@ -1,0 +1,118 @@
+{% include 'customerheader.html' %}
+  <section style="background: url(/static/images/b3.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+
+	<form method="post">
+	{% if data['pay'] %}
+	<div align="center"> 
+	<form method="post">
+		<h2  style="font-size: 50px;"> Payment </h2><br>
+		<table style="width: 400px; border-radius: 5px;font-size: 5px" class="table table-borderless" id="b"> 
+			<tr> 
+				<td style="color: white;font-size: 15px !important"><b>PAYMENT DETAILS</b></td> 
+				<td colspan="2" align="right"><img src="/static/credit_card.png" style="width:70%"></td>
+			</tr>
+			<tr> 
+				<td colspan="2"> <small>CARD NUMBER</small><br> 
+					<input type="text" placeholder="Enter a valid card number"  class="form-control" required pattern="[0-9]{16}" title="Enter 16 digit Card number">
+
+				</td> 
+			</tr>
+			<tr> 
+				<td > CVV<br> 
+					<input type="text" placeholder="CVV"  class="form-control" required pattern="[0-9]{3}" title="Enter 3 digit CV number">
+				</td> 
+				<td> <small>EXPIRATION DATE</small><br> 
+					<input type="text" placeholder="MM/YY"  class="form-control" required pattern="[0-9,/]{5}" title="Enter month and year"> 
+				</td>
+			</tr>
+			<tr> 
+				<td colspan="2"> <small>CARD HOLDER</small><br> 
+					<input type="text" placeholder="Name on card"  class="form-control" data-valid='only-text' required > 
+				</td>
+			</tr>
+			<tr> 
+				<td colspan="2" >
+					<input type="text" name="total" id="total" value="{{ data['pay'] }}" readonly class="form-control">
+				</td>
+			</tr>
+			<tr> 
+				<td colspan="2" align="center"> 
+					<input type="submit" value="PAY"  class="btn btn-success" style="width: 100%" name="pay">
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+
+	<form method="post">
+{% elif data['proqua']%}
+	<h1>UPDATE QUANTITY OF {{data['pname']}}</h1>
+	<table>
+		<tr>
+			<th> QUANTITY</th>
+			
+			<td><input type="number" name="upqua" max="{{data['proqua'] |int}}" placeholder="Only {{data['proqua']}} Left"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2"><input type="submit" name="updatequa" value=UPDATE class="btn btn-primary"></td>
+		</tr>
+	</table>
+	<br>
+	
+	{% elif data['cart']%}
+	<h1>MY CART</h1>
+	{% for row in data['cart']%}
+	<table class="table" style="width: 600px" border="1">
+		<br>
+		<br>
+		<tr>
+			<th align="center">PRODUCT</th>
+			<th>{{row['product']}}</th>
+		</tr>
+		<tr> 
+			<th>QAUNTITY</th>
+			<td>{{row['orqua']}}</td>
+		</tr>
+		<tr>
+			<th>AMOUNT</th>
+			<td>{{row['amount']}}</td>
+		</tr>
+		
+		<tr>
+			<td><a href="?action=update&proid={{row['product_id']}}&ochild_id={{row['ochild_id']}}&prorate={{row['rate']}}&purqua={{row['orqua']}}&proqua={{row['proqua']}}" class="btn btn-primary">UPDATE QUANTITY</a></td>
+			<td><a href="?action=delete&proid={{row['product_id']}}&ochild_id={{row['ochild_id']}}&prorate={{row['rate']}}&purqua={{row['orqua']}}&proqua={{row['proqua']}}" class="btn btn-danger">REMOVE</a></td>
+		</tr>
+
+			
+	
+	</table>
+	{% endfor %}
+	</table>
+<table>
+
+	<tr>
+		<th class="btn btn-primary">TOTAL {{data['cart'][0]['total']}}</th>
+		<td><a href="?action2=payment&amt={{data['cart'][0]['total']}}" class="btn btn-warning">PLACE ORDER</a></td>
+	</tr>
+</table>
+{% else %}
+<h1>YOUR CART EMPTY</h1>
+{% endif %}
+</form>
+</center>
+      </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+
+{% include 'footer.html' %}

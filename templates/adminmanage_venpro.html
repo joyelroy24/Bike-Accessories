@@ -1,0 +1,79 @@
+{% include 'adminheader.html' %}
+
+  <section style="background: url(/static/images/b2.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+	<form method="post">
+		{% if data['pro'] %}
+		<h1>ASSIGN PRODUCTS TO -{{data['vname']}}</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>SL.NO</th>
+				<th>PRODUCT</th>
+				<th>CATEGORY</th>
+				<th>SUBCATEGORY</th>
+				<th>BRAND</th>
+				<TH>RATE</TH>
+			</tr>
+			{% for row in data['pro'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ row['product'] }}</td>
+				<td>{{row['category']}}</td>
+				<td>{{row['subcategory']}}</td> 
+				<td>{{row['brand']}}</td>
+				<td>{{ row['rate'] }}</td>	
+				<td><a href="?action=assign&pid={{ row['product_id'] }}&id={{data['id']}}" class="btn btn-warning">ASSIGN</a></td>	
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h1>NO PRODUCTS TO ASSIGN</h1>
+		{% endif %}
+
+		{% if data['assignedpro']%}
+		<h1>ASSIGNED PRODUCTS OF {{data['vname']}}</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>SL.NO</th>
+				<th>PRODUCT</th>
+				<th>CATEGORY</th>
+				<th>SUBCATEGORY</th>
+				<th>BRAND</th>
+				<TH>RATE</TH>
+			</tr>
+			{% for row in data['assignedpro'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ row['product'] }}</td>
+				<td>{{row['category']}}</td>
+				<td>{{row['subcategory']}}</td>
+				<td>{{row['brand']}}</td>
+				<td>{{ row['rate'] }}</td>	
+				<!-- <td><a href="?action2=remove&vpid={{ row['vproduct_id'] }}&id={{data['id']}}" class="btn btn-warning">REMOVE</a></td> -->
+				{% if row['vpstatus']=='inactive' %}
+				<td><a href="?action2=active&vpid={{ row['vproduct_id'] }}&id={{data['id']}}" class="btn btn-danger" >ACTIVE</a></td>
+				{% else  %}
+				<td><a href="?action2=inactive&vpid={{ row['vproduct_id'] }}&id={{data['id']}}" class="btn btn-danger" >INACTIVE</a></td>		
+				{% endif %}	
+			
+			</tr>
+			{% endfor%}
+		</table>
+		{% endif %}
+	</form>
+</center>
+
+         </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+{% include 'footer.html' %}

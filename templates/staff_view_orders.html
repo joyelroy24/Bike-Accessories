@@ -1,0 +1,119 @@
+{% include 'staffheader.html' %}
+
+<script> 
+    function printDiv() { 
+      var divContents = document.getElementById("div_print").innerHTML; 
+      var a = window.open('', '', 'height=500, width=500'); 
+      a.document.write(divContents); 
+      a.document.close(); 
+      a.print(); 
+    } 
+  </script> 
+
+
+
+  <section style="background: url(/static/images/bike1.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+<form method="post">
+  <table class="table" align="right" style="width: 1000px">
+    <tr>
+      <th>FROM DATE</th>
+      <td><input type="date" name="from_date"></td>
+      <th>TO DATE</th>
+      <td><input type="date" name="to_date"></td>
+      <td>  
+      <input type="submit" name="submit" value="search" class="btn btn-info"></td>
+    </tr>
+  </table>
+</form>
+<br><br><br>
+<br><br>
+
+        {% if data['products'] %}  
+    <h1>PRODUCTS ON ORDER iD-{{data['products'][0]['omaster_id']}} </h1>
+    <table class="table" style="width: 500px"> 
+        <tr>
+            
+            <th>PRODUCT NAME</th>
+            <th>CATEGORY</th>
+            <th>SUBCATEGORY</th>
+            <th>BRAND</th>
+            <th>AMOUNT</th>
+            <th>QUANTITY</th>
+        </tr>
+        {% for row in data['products']%}
+        <tr>
+          
+            <td>{{ row['product'] }}</td>
+            <td>{{ row['category'] }}</td>
+             <td>{{ row['subcategory'] }}</td>
+             <td>{{ row['brand'] }}</td>
+             <td>{{ row['amount'] }}</td>
+            <td align="center" colspan="2">{{ row['orqua'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+	{% elif data['orders'] %}
+
+  <div id="div_print" >
+<h1>VIEW ORDER HISTORY</h1>
+<br>
+<h2>TOTAL AMOUNT :{{data['total']}}.00 RS</h2>
+<br>
+
+		<table class="table" style="width: 1250px">
+		<tr>
+			<th>REFERENCE ID OF PURCHASE</th>
+            <th>CUSTOMER</th>
+            <th>PHONE</th>
+            <th>BOOKED DATE</th>
+			<th>AMOUNT OF PURCHASE</th>
+			<th>VIEW PRODUCTS</th>
+			
+			
+		</tr>
+		{% for row in data['orders'] %}
+        <tr>
+            <td>{{ row['omaster_id']}}</td>
+              <td>{{row['firstname']}}</td>
+            <td>{{row['phone']}}</td>
+            <td>{{row['date']}}</td>
+            <td>{{ row['total']}}</td>
+        
+            <td><a href="?action=products&omaster_id={{row['omaster_id']}}" class="btn btn-danger">VIEW PRODUCTS</a></td>
+           
+            {% if row['omstatus']=='ordered' %}
+              <td><a href="?action=delivered&omaster_id={{row['omaster_id']}}" class="btn btn-danger">UPDATE AS DELVERED</a></td>
+              {% else %}
+               <td>{{row['omstatus']}}</td>
+              {% endif %}
+           
+        </tr>
+        {% endfor %}
+	</table>
+
+
+</div>
+
+ <a href="staff_print" class="btn btn-info">PRINT</a>
+
+	{%else %}
+	<h1>NO BOOKING HISTORY</h1>
+	{% endif %}
+
+</center>
+          </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+                
+{% include 'footer.html' %}

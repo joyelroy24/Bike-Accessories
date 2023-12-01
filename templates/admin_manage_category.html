@@ -1,0 +1,84 @@
+{% include 'adminheader.html' %}
+
+  <section style="background: url(/static/images/b2.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE CATEGORY</h1>
+		
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>CATEGORY</th>
+			<td><input type="text" name="cat"  class="form-control" value="{{data['updater'][0]['category']}}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+		{% else %}
+
+
+	
+		<h1>MANAGE CATEGORY</h1>
+
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>CATEGORY</th>
+			<td><input type="text" name="cat"  class="form-control"></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="SUBMIT" class="btn btn-primary"></td>
+		</tr>
+
+
+		</table>
+
+
+		{% if data['category'] %}
+		<h1>CATEGORIES ADDED IN OUR SYSTEM</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>SL.NO</th>
+				<th>CATEGORY</th>
+				<th>UPDATE</th>
+				
+			</tr>
+			{% for row in data['category'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ row['category'] }}</td>
+				<td><a href="?action=update&id={{ row['category_id'] }}" class="btn btn-warning">UPDATE</a></td>
+				{% if row['status']=='inactive' %}
+				<td><a href="?action=active&id={{ row['category_id'] }}" class="btn btn-danger" >ACTIVE</a></td>
+				{% else  %}
+				<td><a href="?action=inactive&id={{ row['category_id'] }}" class="btn btn-danger" >INACTIVE</a></td>
+				<td><a href="admin_manage_subcat?id={{ row['category_id'] }}&cat={{ row['category'] }}" class="btn btn-primary">MANAGE SUBCATEGORY</a></td>
+				{% endif %}
+				
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO CATEGORIES ADDED IN OUR SYSTEM</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+          </div>
+           </div>
+           
+       </div>  
+      
+   </section>
+		   		
+{% include 'footer.html' %}

@@ -1,0 +1,57 @@
+{% include 'customerheader.html' %}
+  <section style="background: url(/static/images/b3.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+
+    <form method="post">
+	
+		<h1>Send Complaints</h1>
+		
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>Complaints</th>
+			<td><input type="text" name="com"  class="form-control" ></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="send" value="SEND" class="btn btn-primary"></td>
+		</tr>
+	</table>
+	{% if data['comp'] %}
+<h1>VIEW COMPLAINTS HISTORY</h1>
+		<table class="table" style="width: 1250px">
+		<tr>
+			
+            <th>SL NO</th>
+			<th>COMPLAINT</th>
+			<th>REPLY</th>
+			
+			
+		</tr>
+		{% for row in data['comp'] %}
+        <tr>
+            <td>{{ loop.index}}</td>
+            <td>{{row['complaint']}}</td>
+            <td>{{ row['reply']}}</td>
+        
+            
+        </tr>
+        {% endfor %}
+	</table>
+	{%else %}
+	<h1>NO COMPLAINT HISTORY</h1>
+	{% endif %}
+
+</center>
+      </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+{% include 'footer.html' %}

@@ -1,0 +1,48 @@
+{% include 'staffheader.html' %}
+
+  <section style="background: url(/static/images/bike1.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+	<form method="post">
+{% if data['vendor'] %}
+		<h1>VENDORS OF PRODUCT -{{data['pname']}}</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>VENDOR NAME</th>
+				<th>PLACE</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+			</tr>
+			{% for row in data['vendor'] %}
+			<tr>
+				<td>{{ row['vname'] }}</td>
+				<td>{{row ['place']}}</td>
+				<td>{{ row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				<td><a href="?action=update&vid={{ row['vendor_id'] }}&vpid={{ row['vproduct_id'] }}&pid={{data['pid']}}&pname={{data['pname']}}" class="btn btn-warning">BOOK</a></td>
+				
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO VENDORS FOR PRODUCT -{{data['pname']}}</h2>
+		{% endif %}
+
+
+	</form>
+</center>
+          </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+		   		
+
+{% include 'footer.html' %}

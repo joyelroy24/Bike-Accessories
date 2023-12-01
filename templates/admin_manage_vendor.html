@@ -1,0 +1,115 @@
+{% include 'adminheader.html' %}
+
+  <section style="background: url(/static/images/b2.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE VENDOR DETAILS</h1>
+
+
+
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>FIRST NAME</th>
+			<td><input type="text" name="vname"  class="form-control" value="{{data['updater'][0]['vname']}}"></td>
+		</tr>
+
+		<tr>
+			<th>PLACE</th>
+			<td><input type="text" name="place"  class="form-control" value="{{data['updater'][0]['place']}}"></td>
+		</tr>
+		<tr>
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control" value="{{data['updater'][0]['phone']}}"></td>
+		</tr>
+		<tr>
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control" value="{{data['updater'][0]['email']}}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+
+
+		{% else %}
+
+		<h1>MANAGE VENDOR</h1>
+
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>VENDOR NAME</th>
+			<td><input type="text" name="vname"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>PLACE</th>
+			<td><input type="text" name="place"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control"></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+
+		{% if data['vendor'] %}
+		<h1>VENDOR ADDED IN OUR SYSTEM</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>VENDOR NAME</th>
+				<th>PLACE</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+			</tr>
+			{% for row in data['vendor'] %}
+			<tr>
+				<td>{{ row['vname'] }}</td>
+				<td>{{row ['place']}}</td>
+				<td>{{ row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				<td><a href="?action=update&id={{ row['vendor_id'] }}" class="btn btn-warning">UPDATE</a></td>
+
+				{% if row['status']=='inactive' %}
+				<td><a href="?action=active&id={{ row['vendor_id'] }}" class="btn btn-danger" >ACTIVE</a></td>
+				{% else  %}
+				<td><a href="?action=inactive&id={{ row['vendor_id'] }}" class="btn btn-danger" >INACTIVE</a></td>
+				<!-- <td><a href="adminmanage_venpro?id={{ row['vendor_id'] }}" class="btn btn-danger">MANAGE VENDOR PRODUCT</a></td> -->
+				{% endif %}
+				
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO VENDOR ADDED IN OUR SYSTEM</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+          </div>
+           </div>
+          
+       </div>  
+      
+   </section>
+		   		
+{% include 'footer.html' %}

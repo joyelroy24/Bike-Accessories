@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body onload="printDiv()">
+
+
+
+
+
+<script> 
+    function printDiv() { 
+      var divContents = document.getElementById("div_print").innerHTML; 
+      var a = window.open('', '', 'height=500, width=500'); 
+      a.document.write(divContents); 
+      a.document.close(); 
+      a.print(); 
+    } 
+  </script> 
+
+<!--  -->
+
+
+<div style="color: black">
+  
+
+
+<!-- 
+   <div id="div_print" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column ">
+      <br>
+      <h5 class="navbar-brand brand float-md-start mb-0" style="text-align: right;margin-top: -30px;">
+
+      <img style="width:75px; height:50px;" src="/static/images/img/logo.png">
+      <br>CARGO
+      </h5>
+    <p align="left" style="margin-top: -50px;"> <i class="fa fa-address-card" aria-hidden="true"></i>  CARGO-iN, cargo-in Street,India. 
+                     <br><i class="fa fa-phone" aria-hidden="true"></i> +1 234 567 
+                  <br><i class="fa fa-envelope" aria-hidden="true"></i> cargo.in@gmail.com
+    </p> -->
+    <div id="div_print" >
+<h1 align="center">VIEW ORDER HISTORY</h1>
+<br>
+<h2 align="center">TOTAL AMOUNT :{{data['total']}}.00 RS</h2>
+<br>
+    <table class="table" style="width: 1250px" align="center" border="1">
+    <tr>
+      <th>REFERENCE ID OF PURCHASE</th>
+            <th>CUSTOMER</th>
+            <th>PHONE</th>
+            <th>BOOKED DATE</th>
+      <th>AMOUNT OF PURCHASE</th>
+  
+      
+      
+    </tr>
+    {% for row in data['booking'] %}
+        <tr>
+            <td>{{ row['omaster_id']}}</td>
+              <td>{{row['firstname']}}</td>
+            <td>{{row['phone']}}</td>
+            <td>{{row['date']}}</td>
+            <td>{{ row['total']}}</td>
+        
+           
+        </tr>
+        {% endfor %}
+  </table>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+{% include 'adminheader.html' %}
+
+  <section style="background: url(/static/images/b2.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+
+<center>
+
+
+ <script type="text/javascript">
+ 	function TextOnTextChange()
+ 	{
+ 		var x =document.getElementById("p_amount").value;
+ 		var y =document.getElementById("p_qnty").value;
+ 		document.getElementById("t_amount").value = x * y;
+ 	}
+
+ </script>  
+
+	<form method="post">
+		<h1 style="font-size: 50px;">Make Purchase {{data['pname']}}</h1>
+		<div>
+		
+	
+			<!-- <tr>
+				<th>Staff</th>
+				<td>
+					<select name="staff">
+						{% for row in data['staff'] %}
+						<option value="{{row['staff_id']}}">{{row['st_name']}}</option>
+						{% endfor %}
+					
+					</select>
+				</td>
+			</tr> -->
+			<table class="table">
+			<tr>
+				<th>Vendor</th>
+				<td>
+					<select name="vendor" class="form-control" style="color: black;">
+						{% for row in data['vendor'] %}
+						<option value="{{row['vendor_id']}}">{{row['vname']}}</option>
+						{% endfor %}
+					
+					</select>
+				</td>
+			</tr>
+
+			<tr>
+				<th>MRP</th>
+				<td><input type="text" name="mrp" id="p_amount" value="{{ data['mrp'] }}" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>Purchase Quantity</th>
+				<td><input type="text" name="pqnty" id="p_qnty" onchange="TextOnTextChange()" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>Purchase Total</th>
+				<td><input type="text" name="ptotal" id="t_amount" class="form-control"></td>
+			</tr>
+
+			<!-- <tr>
+				<th>Mfd.Date </th>
+				<td><input type="date" name="mfd" class="form-control"></td>
+			</tr>
+
+			<tr>
+				<th>Exp.Date </th>
+				<td><input type="date" name="expd" class="form-control"></td>
+			</tr>
+ -->
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="purchase" value="Purchase" class="btn btn-success"></td>
+			</tr>
+		</table>
+		</div>
+		
+	</form>
+</center>
+
+
+          </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+		   		
+{% include 'footer.html' %}

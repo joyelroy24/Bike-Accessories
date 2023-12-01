@@ -1,0 +1,77 @@
+{% include 'customerheader.html' %}
+
+
+  <section style="background: url(/static/images/b3.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+<center>
+	<form method="post">
+<style type="text/css">
+	td{
+		color: black !important;
+	}
+</style>
+
+		{% if data['customer'] %}
+		<h1>MY PROFILE</h1> 
+		<table class="table" width="600px" style="height: 600px" >
+			<tr>
+				<th>FIRST NAME</th>
+				<td><input type="text" name="" value="{{ data['customer'][0]['firstname'] }}" class="form-control"  readonly></td>
+			</tr>
+			<tr>
+				<th>LAST NAME</th>
+				<td><input type="text" name="" value="{{data['customer'][0] ['lastname']}}" class="form-control" readonly></td>
+			</tr>
+			<tr>
+				<th>PLACE</th>
+				<td><input type="text" name="place" value="{{ data['customer'][0]['place']}}" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>PHONE</th>
+				<td><input type="text" name="ph" value="{{ data['customer'][0]['phone']}}" class="form-control"></td>
+			</tr>
+			
+		
+			<th>GENDER</th>
+			{% if data['customer'][0]['gender']=='Male' %}
+			<td style="color: white !important">Male<input type="radio" name="gen" value="Male" checked>
+				Female<input type="radio" name="gen" value="Female">
+			</td>
+			{% else %}
+			<td style="color: white !important">Male<input type="radio" name="gen" value="Male" >
+				Female<input type="radio" name="gen" value="Female" checked>
+			</td>
+			{% endif %}
+		</tr>
+			<tr>
+				<th>EMAIL</th> 
+				<td><input type="email" name="email" value="{{data['customer'][0]['email']}}" class="form-control"></td>
+			</tr>
+			<tr>
+			
+			<tr>
+				<th>PASSWORD</th>
+				<td><input type="text" name="password" value="{{data['customer'][0]['password']}}" class="form-control"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="UPDATE PROFILE" class="btn btn-info"><!-- &emsp;<a href="?action=delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete your account?');">DELETE ACCOUNT</a></td> -->
+			</tr>
+		</table>
+		{% endif %}
+	
+	</form>
+</center>
+  </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+
+{% include 'footer.html' %}

@@ -1,0 +1,110 @@
+{% include 'customerheader.html' %}
+
+<center>
+		<div class="fullwidthbanner" id="home">
+            <div class="tp-banner">
+                <ul>
+                    <!-- SLIDE 1 -->
+                    <li data-transition="fade" data-slotamount="7" data-masterspeed="1500">
+                        <!-- MAIN IMAGE -->
+                        <img src="/static/images/ro1.jpg" alt="desk" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                        <!-- LAYERS -->
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption slider-title" data-x="center" data-y="center"  data-voffset="-30" data-speed="500" data-start="1200" data-easing="Power4.easeInOut">
+
+
+
+	<style type="text/css">
+td{background-color: transparent;font-weight: 2px;color: black}
+hr{border-color: orange}
+#b {
+	border: 1px solid grey; 
+	padding: 10px;
+}
+
+</style>
+<br>
+<div align="center"> 
+	<form method="post">
+		<h2  style="font-size: 50px;"> Payment </h2><br>
+		<table style="width: 400px; border-radius: 5px;font-size: 5px" class="table table-borderless" id="b"> 
+			<tr> 
+				<td style="color: black;font-size: 15px !important"><b>PAYMENT DETAILS</b></td> 
+				<td colspan="2" align="right"><img src="/static/credit_card.png" style="width:70%"></td>
+			</tr>
+			<tr> 
+				<td colspan="2"> <small>CARD NUMBER</small><br> 
+					<input type="text" placeholder="Enter a valid card number"  class="form-control" required pattern="[0-9]{16}" title="Enter 16 digit Card number">
+
+				</td> 
+			</tr>
+			<tr> 
+				<td > <small>CVV</small><br> 
+					<input type="text" placeholder="CVV"  class="form-control" required pattern="[0-9]{3}" title="Enter 3 digit CV number">
+				</td> 
+				<td> <small>EXPIRATION DATE</small><br> 
+					<input type="text" placeholder="MM/YY"  class="form-control" required pattern="[0-9,/]{5}" title="Enter month and year"> 
+				</td>
+			</tr>
+			<tr> 
+				<td colspan="2"> <small>CARD HOLDER</small><br> 
+					<input type="text" placeholder="Name on card"  class="form-control" data-valid='only-text' required > 
+				</td>
+			</tr>
+			<tr> 
+				<td colspan="2" >
+					<input type="text" name="total" id="total" value="{{ data['total'] }}" readonly class="form-control">
+				</td>
+			</tr>
+			<tr> 
+				<td colspan="2" align="center"> 
+					<input type="submit" value="PAY"  class="btn btn-success" style="width: 100%" name="pay">
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+
+
+<!-- <h1 style="padding-top: 100px">Make Payment</h1>
+<form method="post">
+<table class="table" style="width: 600px;font-size:15px">
+	<tr>
+		<th>Card Number</th>
+		<td><input type="text" name="cardnumber" class="form-control"></td>
+	</tr>
+	<tr>
+		<th>Cvv</th>
+		<td><input type="text" name="cvv" class="form-control"></td>
+	</tr>
+	<tr>
+		<th>Month</th>
+		<td><input type="text" name="month" class="form-control"></td>
+	</tr>
+	<tr>
+		<th>Exp Date</th>
+		<td><input type="text" name="exp" class="form-control"></td>
+	</tr>
+	<tr>
+		<th>Amount</th>
+		<td><input type="text" name="total" id="total" value="{{ data['total'] }}" readonly class="form-control"></td>
+	</tr>
+	<tr>
+		<td align="center" colspan="2"><input type="submit" name="pay" value="PAY" class="btn btn-primary"></td>
+	</tr>
+
+	
+</table>
+</form> -->
+</center>
+                        </div> <!-- /tp-caption -->
+                        <!-- LAYER NR. 2 -->
+                       
+                    </li>
+                    <!-- SLIDE 2 -->
+                    
+                </ul>
+            </div>
+        </div><!--full width banner-->
+
+{% include 'footer.html' %}

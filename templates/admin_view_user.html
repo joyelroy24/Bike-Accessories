@@ -1,0 +1,64 @@
+
+{% include 'adminheader.html' %}
+
+<script> 
+    function printDiv() { 
+      var divContents = document.getElementById("div_print").innerHTML; 
+      var a = window.open('', '', 'height=500, width=500'); 
+      a.document.write(divContents); 
+      a.document.close(); 
+      a.print(); 
+    } 
+  </script> 
+
+
+  <section style="background: url(/static/images/b2.jpg) center center no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  color: #cfcfcf;height: auto;
+        margin-top:80px;" id="home">
+       <div class="overlay">
+           <div class="container">
+               <div class="row">
+
+
+<center>
+	<div id="div_print" >
+	<form method="post">
+		<h1>VIEW USERS</h1>
+		<table class="table">
+			<tr>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>PLACE</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+
+			</tr>
+			{% for row in data['users'] %}
+			<tr>
+				<td>{{row['firstname']}}</td>
+				<td>{{row['lastname']}}</td>
+				<td>{{row['place']}}</td>
+				<td>{{row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				
+			</tr>
+			{% endfor %}
+		</table>
+
+	</form>
+	
+</div>
+
+  <input type="button" class="btn btn-info" value="click to print" onclick="printDiv()">
+</center>
+
+ </div>
+           </div>
+        
+       </div>  
+      
+   </section>
+		   		
+{% include 'footer.html' %}
